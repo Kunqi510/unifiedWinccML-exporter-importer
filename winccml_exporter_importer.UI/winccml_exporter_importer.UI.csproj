@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<UseWPF>true</UseWPF>
+		<ApplicationIcon>icon.ico</ApplicationIcon>
+		<LangVersion>latest</LangVersion>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <Reference Include="System.Windows.Forms" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Resource Include="icon.ico" />
+	  <Resource Include="Resources\**\*" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+		<PackageReference Include="Siemens.Collaboration.Net.Presentation.ViewModels" Version="*" />
+		<PackageReference Include="Siemens.Collaboration.Net.TiaPortal.Presentation" Version="*" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\winccml_exporter_importer.Core\winccml_exporter_importer.Core.csproj" />
+	</ItemGroup>
+
+</Project>

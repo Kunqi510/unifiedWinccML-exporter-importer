@@ -1,0 +1,66 @@
+<Project>
+
+  <!--
+    Delivery targets: Create self-contained delivery folders at the repo root.
+    
+    After build, each entry-point project copies its entire output to:
+      delivery/CLI/     — CLI exe + all dependencies
+      delivery/UI/      — UI exe + all dependencies + Openness DLLs
+      delivery/AddIn/   — .addin file + all dependencies
+    
+    Each folder is fully self-contained — copy it anywhere and it works.
+  -->
+
+  <PropertyGroup>
+    <DeliveryDir>$(MSBuildThisFileDirectory)..\delivery\</DeliveryDir>
+    <OpennessDllDir>C:\Program Files\Siemens\Automation\Portal V21.1\PublicAPI\V21.1\net48</OpennessDllDir>
+  </PropertyGroup>
+
+  <!-- ================================================================ -->
+  <!--  CLI Delivery                                                     -->
+  <!-- ================================================================ -->
+  <Target Name="DeliverCLI" AfterTargets="Build"
+          Condition="'$(MSBuildProjectName)' == 'winccml_exporter_importer.CLI'">
+    <ItemGroup>
+      <CliFiles Include="$(OutputPath)**\*.*" Exclude="$(OutputPath)**\*.pdb" />
+    </ItemGroup>
+    <Copy SourceFiles="@(CliFiles)"
+          DestinationFolder="$(DeliveryDir)CLI\%(RecursiveDir)"
+          SkipUnchangedFiles="true" />
+    <Message Importance="high" Text="Delivered CLI to $(DeliveryDir)CLI\" />
+  </Target>
+
+  <!-- ================================================================ -->
+  <!--  AddIn Delivery                                                   -->
+  <!-- ================================================================ -->
+  <Target Name="DeliverAddIn" AfterTargets="Build"
+          Condition="'$(MSBuildProjectName)' == 'winccml_exporter_importer.Addin'">
+    <ItemGroup>
+      <AddInFiles Include="$(OutputPath)**\*.*"
+                  Exclude="$(OutputPath)**\*.pdb;$(OutputPath)**\Publisher.log" />
+    </ItemGroup>
+    <Copy SourceFiles="@(AddInFiles)"
+          DestinationFolder="$(DeliveryDir)AddIn\%(RecursiveDir)"
+          SkipUnchangedFiles="true" />
+    <Message Importance="high" Text="Delivered AddIn to $(DeliveryDir)AddIn\" />
+  </Target>
+
+  <!-- ================================================================ -->
+  <!--  UI Delivery                                                      -->
+  <!-- ================================================================ -->
+
+  <!-- The Openness NuGet package copies Siemens.Engineering DLLs to the output
+       directory automatically via its .targets file. Just copy everything to delivery. -->
+  <Target Name="DeliverUI" AfterTargets="Build"
+          Condition="'$(MSBuildProjectName)' == 'winccml_exporter_importer.UI'">
+    <ItemGroup>
+      <UiFiles Include="$(OutputPath)**\*.*"
+               Exclude="$(OutputPath)**\*.pdb;$(OutputPath)ref\**" />
+    </ItemGroup>
+    <Copy SourceFiles="@(UiFiles)"
+          DestinationFolder="$(DeliveryDir)UI\%(RecursiveDir)"
+          SkipUnchangedFiles="true" />
+    <Message Importance="high" Text="Delivered UI to $(DeliveryDir)UI\" />
+  </Target>
+
+</Project>

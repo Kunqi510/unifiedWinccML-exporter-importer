@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <RootNamespace>Siemens.Application.TiaPortal.WinccmlExporterImporter.Core</RootNamespace>
+    <AssemblyName>Siemens.Application.TiaPortal.WinccmlExporterImporter.Core</AssemblyName>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Siemens.Collaboration.Net.TiaPortal.Openness.Extensions" Version="21.1.*" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="NLog" Version="5.4.0" />
+  </ItemGroup>
+
+</Project>

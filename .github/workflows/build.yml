@@ -11,6 +11,8 @@ on:
 
 jobs:
   build:
+    timeout-minutes: 30
+
     runs-on:
       - self-hosted
       - Windows
@@ -24,11 +26,11 @@ jobs:
         uses: microsoft/setup-msbuild@v2
 
       - name: Restore NuGet packages
-        shell: powershell
+        shell: cmd
         run: |
-          msbuild "$env:GITHUB_WORKSPACE\winccml_exporter_importer.sln" /t:Restore /p:Configuration=Release /p:RestorePackagesConfig=true
+          msbuild "%GITHUB_WORKSPACE%\winccml_exporter_importer.sln" /t:Restore /p:Configuration=Release /p:RestorePackagesConfig=true
 
       - name: Build solution
-        shell: powershell
+        shell: cmd
         run: |
-          msbuild "$env:GITHUB_WORKSPACE\winccml_exporter_importer.sln" /t:Build /p:Configuration=Release /p:Platform="Any CPU" /m /verbosity:minimal
+          msbuild "%GITHUB_WORKSPACE%\winccml_exporter_importer.sln" /t:Build /p:Configuration=Release /p:Platform="Any CPU" /m /verbosity:minimal

@@ -11,10 +11,10 @@ on:
 
 jobs:
   build:
-  runs-on:
-  - self-hosted
-  - Windows
-  - X64
+    runs-on:
+      - self-hosted
+      - Windows
+      - X64
 
     steps:
       - name: Checkout source
@@ -23,32 +23,12 @@ jobs:
       - name: Setup MSBuild
         uses: microsoft/setup-msbuild@v2
 
-      - name: Locate solution
-        shell: pwsh
-        run: |
-          $solution = Get-ChildItem -Path . -Filter "*.sln" -File | Select-Object -First 1
-
-          if ($null -eq $solution) {
-            throw "No Visual Studio solution file was found."
-          }
-
-          "SOLUTION_PATH=$($solution.FullName)" >> $env:GITHUB_ENV
-          Write-Host "Solution: $($solution.FullName)"
-
       - name: Restore NuGet packages
         shell: pwsh
         run: |
-          msbuild "$env:SOLUTION_PATH" `
-            /t:Restore `
-            /p:Configuration=Release `
-            /p:RestorePackagesConfig=true
+          msbuild "$env:GITHUB_WORKSPACE\winccml_exporter_importer.sln" /t:Restore /p:Configuration=Release /p:RestorePackagesConfig=true
 
       - name: Build solution
         shell: pwsh
         run: |
-          msbuild "$env:SOLUTION_PATH" `
-            /t:Build `
-            /p:Configuration=Release `
-            /p:Platform="Any CPU" `
-            /m `
-            /verbosity:minimal
+          msbuild "$env:GITHUB_WORKSPACE\winccml_exporter_importer.sln" /t:Build /p:Configuration=Release /p:Platform="Any CPU" /m /verbosity:minimal

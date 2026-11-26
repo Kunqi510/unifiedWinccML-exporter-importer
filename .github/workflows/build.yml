@@ -1,0 +1,36 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - master
+      - "feature/**"
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build:
+    timeout-minutes: 30
+
+    runs-on:
+      - self-hosted
+      - Windows
+      - X64
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v2
+
+      - name: Restore NuGet packages
+        shell: cmd
+        run: |
+          msbuild "%GITHUB_WORKSPACE%\winccml_exporter_importer.sln" /t:Restore /p:Configuration=Release /p:RestorePackagesConfig=true
+
+      - name: Build solution
+        shell: cmd
+        run: |
+          msbuild "%GITHUB_WORKSPACE%\winccml_exporter_importer.sln" /t:Build /p:Configuration=Release /p:Platform="Any CPU" /m /verbosity:minimal

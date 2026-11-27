@@ -15,9 +15,22 @@ namespace Siemens.Application.TiaPortal.WinccmlExporterImporter.Core
         /// <summary>
         /// Path to the Openness V21.1 DLL directory.
         /// </summary>
-        private static readonly string OpennessDllDir = Path.Combine(
-            Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles),
-            @"Siemens\Automation\Portal V21.1\PublicAPI\V21.1\net48");
+        private static readonly string OpennessDllDir = GetOpennessDllDirectory();
+
+        private static string GetOpennessDllDirectory()
+        {
+            string programFiles = Environment.GetEnvironmentVariable("ProgramW6432");
+
+            if (string.IsNullOrWhiteSpace(programFiles))
+            {
+                programFiles = Environment.GetFolderPath(
+                    Environment.SpecialFolder.ProgramFiles);
+            }
+
+            return Path.Combine(
+                programFiles,
+                @"Siemens\Automation\Portal V21.1\PublicAPI\V21.1\net48");
+        }
 
         /// <summary>
         /// Static constructor — runs automatically the first time any member is accessed.
@@ -27,6 +40,7 @@ namespace Siemens.Application.TiaPortal.WinccmlExporterImporter.Core
         {
             // Register a fallback resolver that probes the app directory and PublicAPI directory.
             AppDomain.CurrentDomain.AssemblyResolve += OnAssemblyResolve;
+            LoadInstalledOpennessAssemblies();
 
             // Run the NuGet-based resolver (handles Openness DLL resolution on .NET Framework 4.8)
             Api.Global.Openness().Initialize();
@@ -36,6 +50,28 @@ namespace Siemens.Application.TiaPortal.WinccmlExporterImporter.Core
         /// Explicit initialization entry point. Accessing this method triggers the static
         /// constructor. CLI and UI apps may call this at startup for clarity.
         /// </summary>
+        private static void LoadInstalledOpennessAssemblies()
+        {
+            string[] assemblyFileNames =
+            {
+                "Siemens.Engineering.Base.dll",
+                "Siemens.Engineering.WinCCUnified.dll"
+            };
+
+            foreach (string assemblyFileName in assemblyFileNames)
+            {
+                string assemblyPath = Path.Combine(OpennessDllDir, assemblyFileName);
+
+                if (!File.Exists(assemblyPath))
+                {
+                    throw new FileNotFoundException(
+                        $"TIA Portal Openness assembly was not found: {assemblyPath}",
+                        assemblyPath);
+                }
+
+                Assembly.LoadFrom(assemblyPath);
+            }
+        }
         public static void Initialize()
         {
             // No-op: the static constructor does all the work.

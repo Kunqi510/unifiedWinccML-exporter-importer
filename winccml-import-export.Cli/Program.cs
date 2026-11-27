@@ -27,6 +27,9 @@ namespace Siemens.Application.TiaPortal.WinccmlExporterImporter.Cli
                     case "export-screen":
                         return RunExportScreen(args);
 
+                    case "export-tag-table":
+                        return RunExportTagTable(args);
+
                     default:
                         PrintUsage();
                         return 2;
@@ -123,6 +126,40 @@ namespace Siemens.Application.TiaPortal.WinccmlExporterImporter.Cli
             return 0;
         }
 
+        private static int RunExportTagTable(string[] args)
+        {
+            if (args.Length != 4)
+            {
+                PrintUsage();
+                return 2;
+            }
+
+            string projectPath = args[1];
+            string tagTableName = args[2];
+            string destinationFolder = args[3];
+
+            ILoggingService logger = new LoggingService(isAddIn: false);
+
+            var adapter = new ProjectAdapter(
+                projectPath,
+                withUserInterface: false,
+                logger: logger);
+
+            var action = new ExportWinccmlAction(
+                adapter.Project,
+                logger);
+
+            action.ExportTagTable(
+                tagTableName,
+                destinationFolder);
+
+            Console.WriteLine("HMI tag table exported successfully.");
+            Console.WriteLine("Tag table: " + tagTableName);
+            Console.WriteLine("Destination: " + destinationFolder);
+
+            return 0;
+        }
+
         private static void PrintUsage()
         {
             Console.WriteLine("WinCCML CLI");
@@ -133,12 +170,16 @@ namespace Siemens.Application.TiaPortal.WinccmlExporterImporter.Cli
                 "  inspect <TIA Portal project path>");
             Console.WriteLine(
                 "  export-screen <project path> <screen name> <destination folder>");
+            Console.WriteLine(
+               "  export-tag-table <project path> <tag table name> <destination folder>");
             Console.WriteLine();
             Console.WriteLine("Examples:");
             Console.WriteLine(
                 "  inspect \"C:\\Projects\\Demo.ap21\"");
             Console.WriteLine(
                 "  export-screen \"C:\\Projects\\Demo.ap21\" \"Overview\" \"C:\\WinCCML\"");
+            Console.WriteLine(
+                "  export-tag-table \"C:\\Projects\\Demo.ap21\" \"HMI_Tags\" \"C:\\WinCCML\"");
         }
     }
 }

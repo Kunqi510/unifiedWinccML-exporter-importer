@@ -133,13 +133,13 @@ namespace Siemens.Application.TiaPortal.WinccmlExporterImporter.Core.Services
                 {
                     var stderrTarget = new ColoredConsoleTarget("stderr")
                     {
-                        Layout = "${level} | ${message} | ${exception}",
-                        StdErr = true
+                        Layout = "${level} | ${message} | ${exception}"
+
                     };
                     var stdoutTarget = new ColoredConsoleTarget("stdout")
                     {
-                        Layout = "${level} | ${message}",
-                        StdErr = false
+                        Layout = "${level} | ${message}"
+                       
                     };
 
                     config.AddRule(LogLevel.Error, LogLevel.Fatal, stderrTarget);

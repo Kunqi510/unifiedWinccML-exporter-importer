@@ -32,6 +32,8 @@ namespace Siemens.Application.TiaPortal.WinccmlExporterImporter.Cli
                         return RunExportTagTable(args);
                     case "import-screen":
                         return RunImportScreen(args);
+                    case "import-tag-table":
+                        return RunImportTagTable(args);
 
                     default:
                         PrintUsage();
@@ -222,6 +224,43 @@ namespace Siemens.Application.TiaPortal.WinccmlExporterImporter.Cli
             importAction();
             adapter.Project.Save();
         }
+
+        private static int RunImportTagTable(string[] args)
+        {
+            if (args.Length != 4)
+            {
+                PrintUsage();
+                return 2;
+            }
+
+            string projectPath = args[1];
+            string tagTableName = args[2];
+            string sourceFile = args[3];
+
+            ILoggingService logger = new LoggingService(isAddIn: false);
+
+            var adapter = new ProjectAdapter(
+                projectPath,
+                withUserInterface: false,
+                logger: logger);
+
+            var action = new ImportWinccmlAction(
+                adapter.Project,
+                logger);
+
+            ExecuteImport(
+                adapter,
+                "Import WinCCML HMI Tag Table",
+                () => action.ImportTagTable(
+                    tagTableName,
+                    sourceFile));
+
+            Console.WriteLine("HMI tag table imported successfully.");
+            Console.WriteLine("Tag table: " + tagTableName);
+            Console.WriteLine("Source: " + sourceFile);
+
+            return 0;
+        }
         private static void PrintUsage()
         {
             Console.WriteLine("WinCCML CLI");
@@ -236,6 +275,8 @@ namespace Siemens.Application.TiaPortal.WinccmlExporterImporter.Cli
                "  export-tag-table <project path> <tag table name> <destination folder>");
             Console.WriteLine(
                "  import-screen <project path> <WinCCML source file>");
+            Console.WriteLine(
+               "  import-tag-table <project path> <tag table name> <WinCCML source file>");
             Console.WriteLine();
             Console.WriteLine("Examples:");
             Console.WriteLine(
@@ -246,6 +287,8 @@ namespace Siemens.Application.TiaPortal.WinccmlExporterImporter.Cli
                 "  export-tag-table \"C:\\Projects\\Demo.ap21\" \"HMI_Tags\" \"C:\\WinCCML\"");
             Console.WriteLine(
                 "  import-screen \"C:\\Projects\\Demo.ap21\" \"C:\\WinCCML\\Overview.xml\"");
+            Console.WriteLine(
+                "  import-tag-table \"C:\\Projects\\Demo.ap21\" \"HMI_Tags\" \"C:\\WinCCML\\HMI_Tags.xml\"");
         }
     }
 }

@@ -3,6 +3,7 @@ using Siemens.Application.TiaPortal.WinccmlExporterImporter.Core;
 using Siemens.Application.TiaPortal.WinccmlExporterImporter.Core.Actions;
 using Siemens.Application.TiaPortal.WinccmlExporterImporter.Core.Interfaces;
 using Siemens.Application.TiaPortal.WinccmlExporterImporter.Core.Services;
+using Siemens.Engineering;
 using Siemens.Engineering.HW;
 
 namespace Siemens.Application.TiaPortal.WinccmlExporterImporter.Cli
@@ -29,6 +30,8 @@ namespace Siemens.Application.TiaPortal.WinccmlExporterImporter.Cli
 
                     case "export-tag-table":
                         return RunExportTagTable(args);
+                    case "import-screen":
+                        return RunImportScreen(args);
 
                     default:
                         PrintUsage();
@@ -160,6 +163,65 @@ namespace Siemens.Application.TiaPortal.WinccmlExporterImporter.Cli
             return 0;
         }
 
+        private static int RunImportScreen(string[] args)
+        {
+            if (args.Length != 3)
+            {
+                PrintUsage();
+                return 2;
+            }
+
+            string projectPath = args[1];
+            string sourceFile = args[2];
+
+            ILoggingService logger = new LoggingService(isAddIn: false);
+
+            var adapter = new ProjectAdapter(
+                projectPath,
+                withUserInterface: false,
+                logger: logger);
+
+            var action = new ImportWinccmlAction(
+                adapter.Project,
+                logger);
+
+            ExecuteImport(
+                adapter,
+                "Import WinCCML Screen",
+                () => action.ImportScreen(sourceFile));
+
+            Console.WriteLine("Screen imported successfully.");
+            Console.WriteLine("Source: " + sourceFile);
+
+            return 0;
+        }
+
+        private static void ExecuteImport(
+             ProjectAdapter adapter,
+             string operationName,
+        Action importAction)
+        {
+            if (adapter.Portal != null)
+            {
+                using (ExclusiveAccess exclusiveAccess =
+                    adapter.Portal.ExclusiveAccess(operationName))
+                {
+                    using (var transaction =
+                        exclusiveAccess.Transaction(adapter.Project, operationName))
+                    {
+                        importAction();
+                        transaction.CommitOnDispose();
+                    }
+
+                    adapter.Project.Save();
+                }
+
+                return;
+            }
+
+            importAction();
+            adapter.Project.Save();
+        }
         private static void PrintUsage()
         {
             Console.WriteLine("WinCCML CLI");
@@ -172,6 +234,8 @@ namespace Siemens.Application.TiaPortal.WinccmlExporterImporter.Cli
                 "  export-screen <project path> <screen name> <destination folder>");
             Console.WriteLine(
                "  export-tag-table <project path> <tag table name> <destination folder>");
+            Console.WriteLine(
+               "  import-screen <project path> <WinCCML source file>");
             Console.WriteLine();
             Console.WriteLine("Examples:");
             Console.WriteLine(
@@ -180,6 +244,8 @@ namespace Siemens.Application.TiaPortal.WinccmlExporterImporter.Cli
                 "  export-screen \"C:\\Projects\\Demo.ap21\" \"Overview\" \"C:\\WinCCML\"");
             Console.WriteLine(
                 "  export-tag-table \"C:\\Projects\\Demo.ap21\" \"HMI_Tags\" \"C:\\WinCCML\"");
+            Console.WriteLine(
+                "  import-screen \"C:\\Projects\\Demo.ap21\" \"C:\\WinCCML\\Overview.xml\"");
         }
     }
 }

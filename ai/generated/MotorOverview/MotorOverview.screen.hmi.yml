@@ -1,0 +1,225 @@
+#Version: 2.0
+#DirectExport
+
+Screens:
+  MotorOverview:
+    ObjectType: HmiScreen
+    Height: 320
+    Width: 320
+    ScriptModules:
+      VirtualTriggerModule:
+        ObjectType: HmiScriptModule
+        ScriptFile: MotorOverview.screen.VirtualTriggerModule.hmi.js
+      VirtualEventModule:
+        ObjectType: HmiScriptModule
+        ScriptFile: MotorOverview.screen.VirtualEventModule.hmi.js
+    Layers:
+      Layer_0:
+        ObjectType: HmiLayerPart
+        Items:
+          contentBackground:
+            ObjectType: HmiRectangle
+            BackColor: 0xFFF1F3F4
+            BackFillPattern: Solid
+            BorderWidth: 0
+            Height: 280
+            Left: 0
+            Top: 40
+            Visible: True
+            Width: 320
+          popupTitleBar:
+            ObjectType: HmiRectangle
+            BackColor: 0xFF00A1D1
+            BackFillPattern: Solid
+            BorderWidth: 0
+            Height: 40
+            Left: 0
+            Top: 0
+            Visible: True
+            Width: 320
+          popupTitle:
+            ObjectType: HmiTextItem
+            Enabled: True
+            ForeColor: White
+            Height: 24
+            Left: 20
+            Text: TextLibrary.Text_PopupTitle
+            Top: 8
+            Visible: True
+            Width: 280
+            Font:
+              ObjectType: HmiFontPart
+              Description: FontLibrary.Font_Title
+          messageTitle:
+            ObjectType: HmiTextItem
+            Enabled: True
+            ForeColor: Black
+            Height: 22
+            Left: 20
+            Text: TextLibrary.Text_MessageTitle
+            Top: 57
+            Visible: True
+            Width: 280
+            Font:
+              ObjectType: HmiFontPart
+              Description: FontLibrary.Font_MessageTitle
+          messageLine1:
+            ObjectType: HmiTextItem
+            Enabled: True
+            ForeColor: 0xFF4A4A4A
+            Height: 20
+            Left: 20
+            Text: TextLibrary.Text_MessageLine1
+            Top: 82
+            Visible: True
+            Width: 280
+            Font:
+              ObjectType: HmiFontPart
+              Description: FontLibrary.Font_MessageBody
+          messageLine2:
+            ObjectType: HmiTextItem
+            Enabled: True
+            ForeColor: 0xFF4A4A4A
+            Height: 20
+            Left: 20
+            Text: TextLibrary.Text_MessageLine2
+            Top: 101
+            Visible: True
+            Width: 280
+            Font:
+              ObjectType: HmiFontPart
+              Description: FontLibrary.Font_MessageBody
+          optionOneButton:
+            ObjectType: HmiTextBox
+            AlternateBackColor: 0xFF4D4E53
+            BackColor: 0xFF4D4E53
+            BorderWidth: 0
+            Enabled: True
+            ForeColor: White
+            Height: 41
+            Left: 19
+            ShowFocusVisual: True
+            Text: TextLibrary.Text_OptionOne
+            TextWrapping: WordWrap
+            Top: 153
+            Visible: True
+            Width: 289
+            Padding:
+              ObjectType: HmiPaddingPart
+              Bottom: 3
+              Left: 3
+              Right: 3
+              Top: 3
+            Font:
+              ObjectType: HmiFontPart
+              Description: FontLibrary.Font_Button
+          optionTwoButton:
+            ObjectType: HmiTextBox
+            AlternateBackColor: 0xFF4D4E53
+            BackColor: 0xFF4D4E53
+            BorderWidth: 0
+            Enabled: True
+            ForeColor: White
+            Height: 41
+            Left: 19
+            ShowFocusVisual: True
+            Text: TextLibrary.Text_OptionTwo
+            TextWrapping: WordWrap
+            Top: 209
+            Visible: True
+            Width: 289
+            Padding:
+              ObjectType: HmiPaddingPart
+              Bottom: 3
+              Left: 3
+              Right: 3
+              Top: 3
+            Font:
+              ObjectType: HmiFontPart
+              Description: FontLibrary.Font_Button
+          closeButton:
+            ObjectType: HmiTextBox
+            AlternateBackColor: 0xFFCCD2D6
+            BackColor: 0xFFCCD2D6
+            BorderWidth: 0
+            Enabled: True
+            ForeColor: Black
+            Height: 41
+            Left: 19
+            ShowFocusVisual: True
+            Text: TextLibrary.Text_Close
+            TextWrapping: WordWrap
+            Top: 265
+            Visible: True
+            Width: 289
+            Padding:
+              ObjectType: HmiPaddingPart
+              Bottom: 3
+              Left: 3
+              Right: 3
+              Top: 3
+            Font:
+              ObjectType: HmiFontPart
+              Description: FontLibrary.Font_Button
+      Layer_1:
+        ObjectType: HmiLayerPart
+      Layer_2:
+        ObjectType: HmiLayerPart
+      Layer_3:
+        ObjectType: HmiLayerPart
+      Layer_4:
+        ObjectType: HmiLayerPart
+      Layer_5:
+        ObjectType: HmiLayerPart
+      Layer_6:
+        ObjectType: HmiLayerPart
+      Layer_7:
+        ObjectType: HmiLayerPart
+      Layer_8:
+        ObjectType: HmiLayerPart
+      Layer_9:
+        ObjectType: HmiLayerPart
+      Layer_10:
+        ObjectType: HmiLayerPart
+      Layer_11:
+        ObjectType: HmiLayerPart
+      Layer_12:
+        ObjectType: HmiLayerPart
+      Layer_13:
+        ObjectType: HmiLayerPart
+      Layer_14:
+        ObjectType: HmiLayerPart
+      Layer_15:
+        ObjectType: HmiLayerPart
+      Layer_16:
+        ObjectType: HmiLayerPart
+      Layer_17:
+        ObjectType: HmiLayerPart
+      Layer_18:
+        ObjectType: HmiLayerPart
+      Layer_19:
+        ObjectType: HmiLayerPart
+      Layer_20:
+        ObjectType: HmiLayerPart
+      Layer_21:
+        ObjectType: HmiLayerPart
+      Layer_22:
+        ObjectType: HmiLayerPart
+      Layer_23:
+        ObjectType: HmiLayerPart
+      Layer_24:
+        ObjectType: HmiLayerPart
+      Layer_25:
+        ObjectType: HmiLayerPart
+      Layer_26:
+        ObjectType: HmiLayerPart
+      Layer_27:
+        ObjectType: HmiLayerPart
+      Layer_28:
+        ObjectType: HmiLayerPart
+      Layer_29:
+        ObjectType: HmiLayerPart
+      Layer_30:
+        ObjectType: HmiLayerPart
+      Layer_31:
+        ObjectType: HmiLayerPart

@@ -1,0 +1,27 @@
+#Version: 2.0
+#DirectExport
+
+FontDescLibraries:
+  FontLibrary:
+    ObjectType: HmiFontDescLibrary
+    Type: Font
+    Languages:
+    - zh-CN
+    DefaultLanguage: zh-CN
+    Entries:
+      Font_Title:
+        ObjectType: HmiFont
+        FontDescription:
+        - Siemens Sans;16;0;0;0;700
+      Font_MessageTitle:
+        ObjectType: HmiFont
+        FontDescription:
+        - Siemens Sans;16;0;0;0;700
+      Font_MessageBody:
+        ObjectType: HmiFont
+        FontDescription:
+        - Siemens Sans;14;0;0;0;400
+      Font_Button:
+        ObjectType: HmiFont
+        FontDescription:
+        - Siemens Sans;14;0;0;0;700

@@ -1,0 +1,39 @@
+#Version: 2.0
+#DirectExport
+
+TextLibraries:
+  TextLibrary:
+    ObjectType: HmiTextLibrary
+    Type: Text
+    Languages:
+    - zh-CN
+    DefaultLanguage: zh-CN
+    Entries:
+      Text_PopupTitle:
+        ObjectType: HmiText
+        Text:
+        - Pop Up Title
+      Text_MessageTitle:
+        ObjectType: HmiText
+        Text:
+        - A short title is best.
+      Text_MessageLine1:
+        ObjectType: HmiText
+        Text:
+        - A message should be a short
+      Text_MessageLine2:
+        ObjectType: HmiText
+        Text:
+        - complete sentence
+      Text_OptionOne:
+        ObjectType: HmiText
+        Text:
+        - Option 1
+      Text_OptionTwo:
+        ObjectType: HmiText
+        Text:
+        - OPTION 2
+      Text_Close:
+        ObjectType: HmiText
+        Text:
+        - CLOSE

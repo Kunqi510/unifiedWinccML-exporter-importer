@@ -1,0 +1,20 @@
+#Version: 2.0
+#DirectExport
+
+TextLibraries:
+  TextLibrary:
+    ObjectType: HmiTextLibrary
+    Type: Text
+    Languages:
+    - zh-CN
+    DefaultLanguage: zh-CN
+    Entries:
+      Text_1:
+        ObjectType: HmiText
+        Text:
+        - 我是文本
+      Text_2:
+        ObjectType: HmiText
+        Text:
+        - 我是文本框
+

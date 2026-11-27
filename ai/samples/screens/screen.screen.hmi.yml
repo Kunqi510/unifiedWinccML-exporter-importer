@@ -1,0 +1,137 @@
+#Version: 2.0
+#DirectExport
+
+Screens:
+  screen:
+    ObjectType: HmiScreen
+    Height: 768
+    Width: 1366
+    ScriptModules:
+      VirtualTriggerModule:
+        ObjectType: HmiScriptModule
+        ScriptFile: screen.screen.VirtualTriggerModule.hmi.js
+      VirtualEventModule:
+        ObjectType: HmiScriptModule
+        ScriptFile: screen.screen.VirtualEventModule.hmi.js
+    Layers:
+      Layer_0:
+        ObjectType: HmiLayerPart
+        Items:
+          myTestText:
+            ObjectType: HmiTextItem
+            Enabled: True
+            ForeColor: 0xFF333399
+            Height: 50
+            Left: 213
+            RotationAngle: 5
+            Text: TextLibrary.Text_1
+            Top: 65
+            Visible: True
+            Width: 180
+            Font:
+              ObjectType: HmiFontPart
+              Description: FontLibrary.Font_1
+          myText:
+            ObjectType: HmiTextBox
+            AlternateBackColor: Silver
+            BackColor: 0xFF00A1D1
+            BorderWidth: 0
+            Enabled: True
+            ForeColor: White
+            Height: 45
+            Left: 456
+            ShowFocusVisual: True
+            Text: TextLibrary.Text_2
+            TextWrapping: WordWrap
+            Top: 75
+            Width: 145
+            EventHandlers:
+              EventHandler_0:
+                ObjectType: HmiScriptEventHandler
+                EventName: Tapped
+                Type: Script
+                Script: VirtualEventModule.myText_OnTapped
+                ESOrigin: FunctionList
+            Font:
+              ObjectType: HmiFontPart
+              Description: FontLibrary.Font_2
+            Padding:
+              ObjectType: HmiPaddingPart
+              Bottom: 3
+              Left: 3
+              Right: 3
+              Top: 3
+          myRec:
+            ObjectType: HmiRectangle
+            Authorization: DeviceFunctionRights.Monitor
+            BackColor: 0xFF99CCFF
+            BackFillPattern: Solid
+            BorderWidth: 0
+            Height: 50
+            Left: 682
+            RotationAngle: 2
+            Top: 77
+            Width: 110
+      Layer_1:
+        ObjectType: HmiLayerPart
+      Layer_2:
+        ObjectType: HmiLayerPart
+      Layer_3:
+        ObjectType: HmiLayerPart
+      Layer_4:
+        ObjectType: HmiLayerPart
+      Layer_5:
+        ObjectType: HmiLayerPart
+      Layer_6:
+        ObjectType: HmiLayerPart
+      Layer_7:
+        ObjectType: HmiLayerPart
+      Layer_8:
+        ObjectType: HmiLayerPart
+      Layer_9:
+        ObjectType: HmiLayerPart
+      Layer_10:
+        ObjectType: HmiLayerPart
+      Layer_11:
+        ObjectType: HmiLayerPart
+      Layer_12:
+        ObjectType: HmiLayerPart
+      Layer_13:
+        ObjectType: HmiLayerPart
+      Layer_14:
+        ObjectType: HmiLayerPart
+      Layer_15:
+        ObjectType: HmiLayerPart
+      Layer_16:
+        ObjectType: HmiLayerPart
+      Layer_17:
+        ObjectType: HmiLayerPart
+      Layer_18:
+        ObjectType: HmiLayerPart
+      Layer_19:
+        ObjectType: HmiLayerPart
+      Layer_20:
+        ObjectType: HmiLayerPart
+      Layer_21:
+        ObjectType: HmiLayerPart
+      Layer_22:
+        ObjectType: HmiLayerPart
+      Layer_23:
+        ObjectType: HmiLayerPart
+      Layer_24:
+        ObjectType: HmiLayerPart
+      Layer_25:
+        ObjectType: HmiLayerPart
+      Layer_26:
+        ObjectType: HmiLayerPart
+      Layer_27:
+        ObjectType: HmiLayerPart
+      Layer_28:
+        ObjectType: HmiLayerPart
+      Layer_29:
+        ObjectType: HmiLayerPart
+      Layer_30:
+        ObjectType: HmiLayerPart
+      Layer_31:
+        ObjectType: HmiLayerPart
+

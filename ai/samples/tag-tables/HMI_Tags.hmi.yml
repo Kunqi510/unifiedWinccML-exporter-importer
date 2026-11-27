@@ -1,0 +1,68 @@
+#Version: 2.0
+#DirectExport
+
+SimpleTags:
+  Tag1:
+    ObjectType: HmiSimpleTag
+    DataType: Int
+    AcquisitionCycle: T1s
+    AccessMode: SymbolicAccess
+    Active: False
+    MaxLength: 2
+
+  Tag2:
+    ObjectType: HmiSimpleTag
+    DataType: Bool
+    AcquisitionCycle: T1s
+    AccessMode: SymbolicAccess
+    Active: False
+    MaxLength: 1
+
+  Tag3:
+    ObjectType: HmiSimpleTag
+    DataType: String
+    AcquisitionCycle: T1s
+    AccessMode: SymbolicAccess
+    Active: False
+    MaxLength: 254
+
+  Tag4:
+    ObjectType: HmiSimpleTag
+    DataType: Word
+    AcquisitionCycle: T1s
+    AccessMode: SymbolicAccess
+    Active: False
+    MaxLength: 2
+
+  ExternalTag:
+    ObjectType: HmiSimpleTag
+    DataType: Int
+    Address: 0001:TS:8A0E0001.E8687CCF.A
+    Connection: HMI_连接_1
+    ControllerDataType: S7PTransInt16Type
+    AcquisitionCycle: T1s
+    AccessMode: SymbolicAccess
+    PlcTag: winccmlDB.winccmlTags
+    Active: False
+    MaxLength: 2
+
+ArrayTags:
+  Tag5:
+    ObjectType: HmiArrayTag
+    DataType: IntArray
+    AcquisitionCycle: T1s
+    AccessMode: SymbolicAccess
+    Length: 2
+    '.0':
+      ObjectType: HmiSimpleTagMember
+      DataType: Int
+      AcquisitionCycle: T1s
+      AccessMode: SymbolicAccess
+      Active: False
+    '.1':
+      ObjectType: HmiSimpleTagMember
+      DataType: Int
+      AcquisitionCycle: T1s
+      AccessMode: SymbolicAccess
+      Active: False
+

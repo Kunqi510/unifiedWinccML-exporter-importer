@@ -71,6 +71,9 @@
     <ProjectReference Include="..\winccml_exporter_importer.Core\winccml_exporter_importer.Core.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="NLog" Version="5.4.0" />
+  </ItemGroup>
+  <ItemGroup>
     <Reference Include="Siemens.Engineering.Base">
       <HintPath>C:\Program Files\Siemens\Automation\Portal V21.1\PublicAPI\V21.1\net48\Siemens.Engineering.Base.dll</HintPath>
       <Private>False</Private>
